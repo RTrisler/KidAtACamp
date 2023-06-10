@@ -16,4 +16,22 @@ public class Camper : MonoBehaviour
     {
         agent.SetDestination(position);
     }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            agent.updatePosition = false;
+            agent.updateRotation = true;
+            
+            Debug.Log($"Pos: {agent.updatePosition}  Rot: {agent.updateRotation}");
+        }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            agent.updatePosition = true;
+            agent.updateRotation = false;
+            
+            Debug.Log($"Pos: {agent.updatePosition}  Rot: {agent.updateRotation}");
+        }
+    }
 }

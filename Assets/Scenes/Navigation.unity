@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -335,7 +335,7 @@ MonoBehaviour:
   - {fileID: 778651048}
   - {fileID: 97837777}
   - {fileID: 213994854}
-  camperPrefab: {fileID: 8677727959701634360, guid: e9ab4eac8e8694b4a8f9bf0d2161edc8, type: 3}
+  camperPrefab: {fileID: 7841527941996154585, guid: e9ab4eac8e8694b4a8f9bf0d2161edc8, type: 3}
 --- !u!4 &141943229
 Transform:
   m_ObjectHideFlags: 0
