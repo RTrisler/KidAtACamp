@@ -24,9 +24,9 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 47cd86021c335854592b2fcf105c3e2c, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 0d8a59f998ca5954082afc3c4ea74c53, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.25452307, g: 0.20992544, b: 0.36301506, a: 1}
+  m_IndirectSpecularColor: {r: 1.039384, g: 0.34491846, b: 0.30499366, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2691,7 +2691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65d05e5fe64895458ebcd98ad9e8fab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeEffect: {fileID: 0}
+  fadeEffect: {fileID: 1759390774}
 --- !u!4 &1484467820
 Transform:
   m_ObjectHideFlags: 0
@@ -3283,6 +3283,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 86b6f206e09dae647a8c28fccb4ecd37, type: 3}
   m_PrefabInstance: {fileID: 1756356481}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1759390774 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4741448046091694155, guid: aa88abefdc9a6d741a7ff0702dcbd4cd, type: 3}
+  m_PrefabInstance: {fileID: 9075228729134813357}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1773613067
 PrefabInstance:
@@ -4250,6 +4255,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4741448046091694149, guid: aa88abefdc9a6d741a7ff0702dcbd4cd, type: 3}
+      propertyPath: firstToLast
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9075228728250944393, guid: aa88abefdc9a6d741a7ff0702dcbd4cd, type: 3}
       propertyPath: m_Pivot.x
       value: 0

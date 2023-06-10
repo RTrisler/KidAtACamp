@@ -256,6 +256,11 @@ MonoBehaviour:
   morningMeetingNodesParent: {fileID: 943868845}
   freeRoamNodesParent: {fileID: 602986876}
   campFireNodesParent: {fileID: 82205746}
+  cabinStartNodes: []
+  messHallNodes: []
+  morningMeetingNodes: []
+  freeRoamNodes: []
+  campFireNodes: []
   camperPrefab: {fileID: 7841527941996154585, guid: e9ab4eac8e8694b4a8f9bf0d2161edc8, type: 3}
 --- !u!4 &141943229
 Transform:
