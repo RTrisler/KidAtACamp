@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static InputController Instance;
+    private GameInput _gameInput;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        if(Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            _gameInput = new GameInput();
+        }
     }
 }
