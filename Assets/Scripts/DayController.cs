@@ -8,7 +8,7 @@ public class DayController : MonoBehaviour
     public static DayController Instance;
     public event Action<int, DayState> OnStateChange;
 
-    public int _dayCounter;
+    public int _dayCounter; //integer value representation for the day number
     public DayState _dayState;
 
     private void Start()
@@ -20,14 +20,19 @@ public class DayController : MonoBehaviour
         else
         {
             Instance = this;
-            _dayCounter = 1;
-            _dayState = DayState.WakeUp;
+            _dayCounter = 0;
+            ChangeState(DayState.WakeUp);
         }
     }
 
     public void ChangeState(DayState newState)
     {
-        OnStateChange?.Invoke(_dayCounter, newState);
+        _dayState = newState;
+        if(newState == DayState.WakeUp)
+        {
+            _dayCounter++; //increases day
+        }
+        OnStateChange?.Invoke(_dayCounter, _dayState);
     }
 }
 public enum DayState
