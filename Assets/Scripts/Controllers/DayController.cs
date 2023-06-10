@@ -13,6 +13,16 @@ public class DayController : MonoBehaviour
     public int _dayCounter; //integer value representation for the day number
     [HideInInspector]
     public DayState _dayState;
+    private int _pickUpCount;
+
+    private void OnEnable()
+    {
+        GuidedTaskInteractable.OnGuidedTaskPickUp += TrackPickUps;
+    }
+    private void OnDisable()
+    {
+        GuidedTaskInteractable.OnGuidedTaskPickUp -= TrackPickUps;
+    }
 
     private void Awake()
     {
@@ -45,6 +55,7 @@ public class DayController : MonoBehaviour
     void StartDay(int day)
     {
         _dayCounter = day;
+        _pickUpCount = 0;
         ChangeState(DayState.WakeUp);
     }
 
@@ -70,6 +81,16 @@ public class DayController : MonoBehaviour
         Debug.Log($"Forcing next state: {states[idx].ToString()}");
         ChangeState(states[idx]);
         
+    }
+
+    private void TrackPickUps()
+    {
+        _pickUpCount++;
+        if(_pickUpCount == 5)
+        {
+            _pickUpCount = 0;
+            ChangeState(DayState.Dinner);
+        }
     }
 }
 public enum DayState
