@@ -21,10 +21,11 @@ public class InputController : MonoBehaviour, GameInput.IMovementActions
         }
         else
         {
+            Debug.Log(this);
             Instance = this;
             _gameInput = new GameInput();
-            SwitchInput(InputState.Defualt);
             _gameInput.Movement.SetCallbacks(this);
+            SwitchInput(InputState.Defualt);
         }
     }
 
@@ -35,7 +36,11 @@ public class InputController : MonoBehaviour, GameInput.IMovementActions
     #region InputMethods
     public void OnMovement(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Performed)
+        if(context.phase == InputActionPhase.Canceled)
+        {
+            OnMovementInput?.Invoke(new Vector3(0,0,0));
+        }
+        else
         {
             OnMovementInput?.Invoke(context.ReadValue<Vector2>());
         }
