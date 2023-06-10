@@ -38,9 +38,10 @@ public class DayController : MonoBehaviour
 public enum DayState
 {
     WakeUp,
+    Breakfast,
     MorningMeeting,
-    Lunch,
     FreeRoam,
+    FreeTimeMeetup,
     GuidedTask,
     Dinner,
     CampFire,
