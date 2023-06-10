@@ -8,8 +8,6 @@ public class CameraZone : MonoBehaviour
 
     [SerializeField]
     private Camera _zoneCamera;
-	[SerializeField]
-	AudioController AudioController;	
 
     private void Start()
     {
@@ -37,8 +35,8 @@ public class CameraZone : MonoBehaviour
             _currentZone = this;
             _currentZone.EnableCamera();
 
-            AudioController.MoveToPosition(_currentZone._zoneCamera.transform.position);
-			AudioController.CurrentCamera = _zoneCamera;
+            AudioController.Instance.MoveToPosition(_currentZone._zoneCamera.transform.position);
+			AudioController.Instance.CurrentCamera = _zoneCamera;
         }
     }
 }

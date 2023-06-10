@@ -6,6 +6,7 @@ using System.Linq;
 
 public class AudioController : MonoBehaviour
 {
+	public static AudioController Instance;
 	public Camera CurrentCamera;
 
 	[SerializeField]
@@ -25,6 +26,18 @@ public class AudioController : MonoBehaviour
 	AudioSource EnvAmbienceSrc => CameraSources.ElementAt(0);
 	AudioSource MusicSrc => CameraSources.ElementAt(1);
 	AudioSource EnvEventSrc => CameraSources.ElementAt(2);
+
+    private void Awake()
+    {
+        if(Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
 
 	public void InitializeCameraAudio()
 	{
