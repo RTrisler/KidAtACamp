@@ -1,17 +1,31 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class WorldNavPointController : MonoBehaviour
 {
-    public List<Transform> cabinStartNodes;
-    public List<Transform> messHallNodes;
-    public List<Transform> morningMeetingNodes;
-    public List<Transform> freeRoamNodes;
-    public List<Transform> campFireNodes;
+    public static WorldNavPointController Instance;
+    public Transform cabinStartNodesParent;
+    public Transform messHallNodesParent;
+    public Transform morningMeetingNodesParent;
+    public Transform freeRoamNodesParent;
+    public Transform campFireNodesParent;
+
+
+    [HideInInspector]
+    public List<Transform> cabinStartNodes = new();
+    [HideInInspector]
+    public List<Transform> messHallNodes = new();
+    [HideInInspector]
+    public List<Transform> morningMeetingNodes = new();
+    [HideInInspector]
+    public List<Transform> freeRoamNodes = new();
+    [HideInInspector]
+    public List<Transform> campFireNodes = new();
 
     public Camper camperPrefab;
     private List<Camper> campers = new List<Camper>();
@@ -20,8 +34,31 @@ public class WorldNavPointController : MonoBehaviour
 
     void Awake()
     {
-        rng = new System.Random();
+        Instance = this;
         
+        rng = new System.Random();
+
+        foreach (Transform t in cabinStartNodesParent)
+        {
+            cabinStartNodes.Add(t);
+        }
+        foreach (Transform t in messHallNodesParent)
+        {
+            messHallNodes.Add(t);
+        }
+        foreach (Transform t in morningMeetingNodesParent)
+        {
+            morningMeetingNodes.Add(t);
+        }
+        foreach (Transform t in freeRoamNodesParent)
+        {
+            freeRoamNodes.Add(t);
+        }
+        foreach (Transform t in campFireNodesParent)
+        {
+            campFireNodes.Add(t);
+        }
+
         if (cabinStartNodes.Count != messHallNodes.Count
             || cabinStartNodes.Count != morningMeetingNodes.Count
             || cabinStartNodes.Count != freeRoamNodes.Count
@@ -32,9 +69,11 @@ public class WorldNavPointController : MonoBehaviour
         }
 
         // inst campers at spawn points, shuffle the others, use id to key into the others
-        foreach (var spawnPt in cabinStartNodes)
+        for(int i = 0; i < cabinStartNodes.Count; i++)
         {
-            campers.Add(GameObject.Instantiate(camperPrefab, spawnPt.position, Quaternion.identity));
+            var camper = GameObject.Instantiate(camperPrefab, cabinStartNodes[i].position, Quaternion.identity);
+            camper.camperIndex = i;
+            campers.Add(camper);
         }
         
         messHallNodes.Shuffle(rng);
@@ -43,91 +82,107 @@ public class WorldNavPointController : MonoBehaviour
         campFireNodes.Shuffle(rng);
     }
 
-    void Update()
+    public bool CampersHaveArrived()
     {
-        // === DEBUG ===
-        if (Input.GetKeyDown(KeyCode.Q))
+        foreach (var camper in campers)
         {
-            Goto(DayState.Breakfast);
+            if (!camper.Arrived()) return false;
         }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            Goto(DayState.MorningMeeting);
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Goto(DayState.FreeRoam);
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Goto(DayState.FreeTimeMeetup);
-        }
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Goto(DayState.Dinner);
-        }
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            Goto(DayState.CampFire);
-        }
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            Goto(DayState.Bedtime);
-        }
+
+        return true;
     }
 
-    public void Goto(DayState state)
+    void Update()
     {
-        switch (state)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-                case DayState.WakeUp:
-                case DayState.Breakfast:
-                    for (int i = 0; i < campers.Count; i++)
-                    {
-                        campers[i].Goto(messHallNodes[i].position);
-                    }
-                    break;
-                case DayState.MorningMeeting:
-                    for (int i = 0; i < campers.Count; i++)
-                    {
-                        campers[i].Goto(morningMeetingNodes[i].position);
-                    }
-                    break;
-                case DayState.FreeRoam:
-                    for (int i = 0; i < campers.Count; i++)
-                    {
-                        campers[i].Goto(freeRoamNodes[i].position);
-                    }
-                    break;
-                case DayState.FreeTimeMeetup:
-                    for (int i = 0; i < campers.Count; i++)
-                    {
-                        campers[i].Goto(campFireNodes[i].position);
-                    }
-                    break;
-                case DayState.GuidedTask:
-                case DayState.Dinner:
-                    for (int i = 0; i < campers.Count; i++)
-                    {
-                        campers[i].Goto(messHallNodes[i].position);
-                    }
-                    break;
-                case DayState.CampFire:
-                    for (int i = 0; i < campers.Count; i++)
-                    {
-                        campers[i].Goto(campFireNodes[i].position);
-                    }
-                    break;
-                case DayState.Bedtime:
-                    for (int i = 0; i < campers.Count; i++)
-                    {
-                        campers[i].Goto(cabinStartNodes[i].position);
-                    }
-                    break;
-                default:
-                    break;
+            
         }
+        // === DEBUG ===
+        // if (Input.GetKeyDown(KeyCode.Q))
+        // {
+        //     Goto(DayState.Breakfast);
+        // }
+        // if (Input.GetKeyDown(KeyCode.W))
+        // {
+        //     Goto(DayState.MorningMeeting);
+        // }
+        // if (Input.GetKeyDown(KeyCode.E))
+        // {
+        //     Goto(DayState.FreeRoam);
+        // }
+        // if (Input.GetKeyDown(KeyCode.R))
+        // {
+        //     Goto(DayState.FreeTimeMeetup);
+        // }
+        // if (Input.GetKeyDown(KeyCode.T))
+        // {
+        //     Goto(DayState.Dinner);
+        // }
+        // if (Input.GetKeyDown(KeyCode.Y))
+        // {
+        //     Goto(DayState.CampFire);
+        // }
+        // if (Input.GetKeyDown(KeyCode.U))
+        // {
+        //     Goto(DayState.Bedtime);
+        // }
     }
+
+    // public void Goto(DayState state)
+    // {
+    //     switch (state)
+    //     {
+    //             case DayState.WakeUp:
+    //             case DayState.Breakfast:
+    //                 for (int i = 0; i < campers.Count; i++)
+    //                 {
+    //                     campers[i].Goto(messHallNodes[i].position);
+    //                 }
+    //                 break;
+    //             case DayState.MorningMeeting:
+    //                 for (int i = 0; i < campers.Count; i++)
+    //                 {
+    //                     campers[i].Goto(morningMeetingNodes[i].position);
+    //                 }
+    //                 break;
+    //             case DayState.FreeRoam:
+    //                 for (int i = 0; i < campers.Count; i++)
+    //                 {
+    //                     campers[i].Goto(freeRoamNodes[i].position);
+    //                 }
+    //                 break;
+    //             case DayState.FreeTimeMeetup:
+    //                 for (int i = 0; i < campers.Count; i++)
+    //                 {
+    //                     campers[i].Goto(campFireNodes[i].position);
+    //                 }
+    //                 break;
+    //             case DayState.GuidedTask:
+    //             case DayState.Dinner:
+    //                 for (int i = 0; i < campers.Count; i++)
+    //                 {
+    //                     campers[i].Goto(messHallNodes[i].position);
+    //                 }
+    //                 break;
+    //             case DayState.CampFire:
+    //                 for (int i = 0; i < campers.Count; i++)
+    //                 {
+    //                     campers[i].Goto(campFireNodes[i].position);
+    //                 }
+    //                 break;
+    //             case DayState.Bedtime:
+    //                 for (int i = 0; i < campers.Count; i++)
+    //                 {
+    //                     campers[i].Goto(cabinStartNodes[i].position);
+    //                 }
+    //                 break;
+    //             default:
+    //                 break;
+    //     }
+    // }
+
+    
 }
 
 public static class ListExtensions

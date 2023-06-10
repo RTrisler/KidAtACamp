@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 
-public class InputController : MonoBehaviour, GameInput.IMovementActions
+public class InputController : MonoBehaviour, GameInput.IMovementActions, GameInput.IInteractionActions
 {
     public static InputController Instance;
     public event Action<InputState> OnInputStateChange;
     public event Action<Vector2> OnMovementInput;
+    public event Action OnInteractPressed;
 
     private GameInput _gameInput;
     private InputState _gameInputState;
@@ -21,23 +22,37 @@ public class InputController : MonoBehaviour, GameInput.IMovementActions
         }
         else
         {
+            Debug.Log(this);
             Instance = this;
             _gameInput = new GameInput();
-            SwitchInput(InputState.Defualt);
             _gameInput.Movement.SetCallbacks(this);
+            _gameInput.Interaction.SetCallbacks(this);
+            SwitchInput(InputState.Defualt);
         }
     }
 
     private void OnDisable()
     {
-        _gameInput.Movement.Disable();
+        DisableInputs();
     }
     #region InputMethods
     public void OnMovement(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Performed)
+        if(context.phase == InputActionPhase.Canceled)
+        {
+            OnMovementInput?.Invoke(new Vector3(0,0,0));
+        }
+        else
         {
             OnMovementInput?.Invoke(context.ReadValue<Vector2>());
+        }
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Performed)
+        {
+            OnInteractPressed?.Invoke();
         }
     }
     #endregion
@@ -47,20 +62,36 @@ public class InputController : MonoBehaviour, GameInput.IMovementActions
         switch (newInputState)
         {
             case InputState.Disable:
+                DisableInputs();
+                break;
+            case InputState.Dialogue:
                 _gameInput.Movement.Disable();
                 break;
             case InputState.Defualt:
-                _gameInput.Movement.Enable();
+                EnableInputs();
                 break;
             case InputState.Trial1:
                 _gameInput.Movement.Disable();
                 break;
         }
     }
+
+    private void DisableInputs()
+    {
+        _gameInput.Movement.Disable();
+        _gameInput.Interaction.Disable();
+    }
+
+    private void EnableInputs()
+    {
+        _gameInput.Movement.Enable();
+        _gameInput.Interaction.Enable();
+    }
 }
 public enum InputState
 {
     Disable,
+    Dialogue,
     Defualt,
     Trial1,
     Trial2,
