@@ -5,7 +5,7 @@ using UnityEngine;
 public class InputController : MonoBehaviour
 {
     public static InputController Instance;
-    private GameInput _gameInput;
+    //private GameInput _gameInput;
 
     private void Start()
     {
@@ -16,7 +16,7 @@ public class InputController : MonoBehaviour
         else
         {
             Instance = this;
-            _gameInput = new GameInput();
+            //_gameInput = new GameInput();
         }
     }
 }
