@@ -2134,7 +2134,7 @@ MonoBehaviour:
   gradation: 8
   dither: 1
   crtTexture: {fileID: 0}
-  crtColorGain: 1
+  crtColorGain: 1.22
   crtTextureScale: 1
   crtCurve: 0
   grayScaleFactor: {x: 0.2126, y: 0.7152, z: 0.0722}
