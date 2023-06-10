@@ -5,8 +5,12 @@ using UnityEngine;
 public class CameraZone : MonoBehaviour
 {
     public static CameraZone _currentZone = null;
+
     [SerializeField]
     private Camera _zoneCamera;
+	[SerializeField]
+	AudioController AudioController;	
+
     private void Start()
     {
         _zoneCamera.enabled = false;
@@ -31,8 +35,10 @@ public class CameraZone : MonoBehaviour
                 _currentZone.DisableCamera();
             }
             _currentZone = this;
-            //AudioController.Instance.MoveToPosition(_currentZone._zoneCamera.transform.position);
             _currentZone.EnableCamera();
+
+            AudioController.MoveToPosition(_currentZone._zoneCamera.transform.position);
+			AudioController.CurrentCamera = _zoneCamera;
         }
     }
 }

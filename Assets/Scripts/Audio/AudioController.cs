@@ -6,12 +6,12 @@ using System.Linq;
 
 public class AudioController : MonoBehaviour
 {
+	public Camera CurrentCamera;
+
 	[SerializeField]
 	ClipRefs ClipRefs;
 	[SerializeField]
 	DayController DayController;
-	[SerializeField]
-	Camera CurrentCamera;
 	[SerializeField]
 	List<AudioSource> CameraSources;
 
@@ -36,9 +36,8 @@ public class AudioController : MonoBehaviour
 		MusicSrc.outputAudioMixerGroup = MusicGroup;
 		EnvAmbienceSrc.outputAudioMixerGroup = EnvGroup;
 		EnvEventSrc.outputAudioMixerGroup = EnvGroup;
-		StartDay();
 	}
-
+	
 	public void StartDay()
 	{
 		// Daycontroller singleton to differentiate (day counter)
@@ -93,5 +92,10 @@ public class AudioController : MonoBehaviour
             yield return null;
         }
         yield break;
+	}
+
+	public void MoveToPosition(Vector3 cameraPosition)
+	{
+		transform.position = cameraPosition;
 	}
 }

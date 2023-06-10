@@ -14,6 +14,9 @@ public class DayController : MonoBehaviour
     [HideInInspector]
     public DayState _dayState;
 
+	[SerializeField]
+	AudioController AudioController;
+
     private void Awake()
     {
         if(Instance != null)
@@ -38,6 +41,7 @@ public class DayController : MonoBehaviour
         {
             _dayCounter++; //increases day
             Debug.Log($"Day {_dayCounter}!");
+			AudioController.StartDay();
         }
         OnStateChange?.Invoke(_dayCounter, _dayState);
     }
