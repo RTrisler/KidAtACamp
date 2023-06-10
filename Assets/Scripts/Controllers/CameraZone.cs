@@ -31,6 +31,7 @@ public class CameraZone : MonoBehaviour
                 _currentZone.DisableCamera();
             }
             _currentZone = this;
+            //AudioController.Instance.MoveToPosition(_currentZone._zoneCamera.transform.position);
             _currentZone.EnableCamera();
         }
     }
