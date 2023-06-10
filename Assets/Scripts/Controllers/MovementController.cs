@@ -6,7 +6,10 @@ using UnityEngine.AI;
 public class MovementController : MonoBehaviour
 {
     private NavMeshAgent _navAgent;
-    private void OnEnable()
+    private Vector2 _moveDirection;
+    [SerializeField]
+    private float _rotationSpeed;
+    private void Start()
     {
         _navAgent = GetComponent<NavMeshAgent>();
         InputController.Instance.OnMovementInput += MovePlayer;
@@ -18,14 +21,14 @@ public class MovementController : MonoBehaviour
 
     private void MovePlayer(Vector2 movementVector)
     {
-        if (movementVector == new Vector2(1, 0) || movementVector == new Vector2(-1, 0))
+        _moveDirection = movementVector;
+    }
+    private void Update()
+    {
+        if (_moveDirection == new Vector2(1, 0) || _moveDirection == new Vector2(-1, 0))
         {
-            var currentPosition = this.transform.position;
-            //_navAgent.SetDestination(new Vector3(currentPosition.x + movementVector.x, currentPosition.));
+            transform.Rotate(new Vector3(0, _rotationSpeed * _moveDirection.x, 0) * Time.deltaTime);
         }
-        else if (movementVector == new Vector2(0, 1) || movementVector == new Vector2(0, -1)) 
-        {
-
-        }
+        _navAgent.destination = (transform.position + (transform.forward * _moveDirection.y));
     }
 }
