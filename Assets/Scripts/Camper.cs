@@ -7,31 +7,30 @@ using UnityEngine.AI;
 public class Camper : MonoBehaviour
 {
     private NavMeshAgent agent;
+    private Animator animator;
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
     }
+    
     public void Goto(Vector3 position)
     {
         agent.SetDestination(position);
     }
-
+    
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L))
+        bool isMoving = agent.velocity.magnitude > 0.25f;
+        animator.SetBool("WalkingFwd", isMoving);
+        if (isMoving)
         {
-            agent.updatePosition = false;
-            agent.updateRotation = true;
-            
-            Debug.Log($"Pos: {agent.updatePosition}  Rot: {agent.updateRotation}");
+            animator.speed = agent.velocity.magnitude / agent.speed;
         }
-        if (Input.GetKeyDown(KeyCode.K))
+        else
         {
-            agent.updatePosition = true;
-            agent.updateRotation = false;
-            
-            Debug.Log($"Pos: {agent.updatePosition}  Rot: {agent.updateRotation}");
+            animator.speed = 1f;
         }
     }
 }

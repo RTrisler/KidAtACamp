@@ -1,17 +1,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class WorldNavPointController : MonoBehaviour
 {
-    public List<Transform> cabinStartNodes;
-    public List<Transform> messHallNodes;
-    public List<Transform> morningMeetingNodes;
-    public List<Transform> freeRoamNodes;
-    public List<Transform> campFireNodes;
+    public Transform cabinStartNodesParent;
+    public Transform messHallNodesParent;
+    public Transform morningMeetingNodesParent;
+    public Transform freeRoamNodesParent;
+    public Transform campFireNodesParent;
+    
+    private List<Transform> cabinStartNodes = new();
+    private List<Transform> messHallNodes = new();
+    private List<Transform> morningMeetingNodes = new();
+    private List<Transform> freeRoamNodes = new();
+    private List<Transform> campFireNodes = new();
 
     public Camper camperPrefab;
     private List<Camper> campers = new List<Camper>();
@@ -21,7 +28,28 @@ public class WorldNavPointController : MonoBehaviour
     void Awake()
     {
         rng = new System.Random();
-        
+
+        foreach (Transform t in cabinStartNodesParent)
+        {
+            cabinStartNodes.Add(t);
+        }
+        foreach (Transform t in messHallNodesParent)
+        {
+            messHallNodes.Add(t);
+        }
+        foreach (Transform t in morningMeetingNodesParent)
+        {
+            morningMeetingNodes.Add(t);
+        }
+        foreach (Transform t in freeRoamNodesParent)
+        {
+            freeRoamNodes.Add(t);
+        }
+        foreach (Transform t in campFireNodesParent)
+        {
+            campFireNodes.Add(t);
+        }
+
         if (cabinStartNodes.Count != messHallNodes.Count
             || cabinStartNodes.Count != morningMeetingNodes.Count
             || cabinStartNodes.Count != freeRoamNodes.Count
