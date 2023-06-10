@@ -27,6 +27,11 @@ public class InputController : MonoBehaviour, GameInput.IMovementActions
             _gameInput.Movement.SetCallbacks(this);
         }
     }
+
+    private void OnDisable()
+    {
+        _gameInput.Movement.Disable();
+    }
     #region InputMethods
     public void OnMovement(InputAction.CallbackContext context)
     {
