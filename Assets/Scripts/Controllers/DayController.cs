@@ -11,7 +11,7 @@ public class DayController : MonoBehaviour
     public int _dayCounter; //integer value representation for the day number
     public DayState _dayState;
 
-    private void Start()
+    private void Awake()
     {
         if(Instance != null)
         {

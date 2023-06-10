@@ -13,7 +13,7 @@ public class InputController : MonoBehaviour, GameInput.IMovementActions
     private GameInput _gameInput;
     private InputState _gameInputState;
 
-    private void Start()
+    private void Awake()
     {
         if(Instance != null)
         {
@@ -51,7 +51,6 @@ public class InputController : MonoBehaviour, GameInput.IMovementActions
                 _gameInput.Movement.Disable();
                 break;
         }
-        OnInputStateChange?.Invoke(newInputState);
     }
 }
 public enum InputState
