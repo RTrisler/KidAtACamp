@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Yarn;
+using System;
 
 public abstract class Interactable : MonoBehaviour
 {
@@ -39,5 +40,36 @@ public class NPCInteractable : Interactable
         InputController.Instance.SwitchInput(InputState.Defualt);
         DialogueSingleton.Instance.gameObject.GetComponent<Yarn.Unity.DialogueRunner>().onDialogueComplete.RemoveListener(OnDialogueCompleted);
 
+    }
+}
+
+public class GuidedTaskInteractable : Interactable
+{
+    public static event Action OnGuidedTaskPickUp;
+
+    private void Start()
+    {
+        this.gameObject.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        DayController.Instance.OnStateChange += CheckState;
+    }
+    private void OnDisable()
+    {
+        DayController.Instance.OnStateChange -= CheckState;
+    }
+    private void CheckState(int dayCount, DayState currentState)
+    {
+        if(currentState == DayState.GuidedTask)
+        {
+            this.gameObject.SetActive(true);
+        }
+    }
+    public override void Interact()
+    {
+        this.gameObject.SetActive(false);
+        OnGuidedTaskPickUp?.Invoke();
     }
 }
