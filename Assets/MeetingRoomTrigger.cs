@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeetingRoomTrigger : MonoBehaviour
+public class MeetingRoomTrigger : PlayerGameTrigger
 {
-    public void OnTriggerEnter(Collider other)
+    protected override void FireStateEvent()
     {
-        
-        if (other.CompareTag("Player"))
+        Debug.Log($"Firing!");
+        if (DayController.Instance._dayState == DayState.MorningMeeting)
         {
-            if (DayController.Instance._dayState == DayState.MorningMeeting)
-            {
-                DayController.Instance.ChangeState(DayState.FreeRoam);
-            }
+            DayController.Instance.ChangeState(DayState.FreeRoam);
         }
     }
 }

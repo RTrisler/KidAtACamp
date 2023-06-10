@@ -2,24 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CampfireTrigger : MonoBehaviour
+public class CampfireTrigger : PlayerGameTrigger
 {
-    public void OnTriggerEnter(Collider other)
+    protected override void FireStateEvent()
     {
-        Debug.Log($"?");
-        if (other.CompareTag("Player"))
+        Debug.Log($"Firing!");
+        if (DayController.Instance._dayState == DayState.FreeTimeMeetup)
         {
-            Debug.Log($"??");
-            if (DayController.Instance._dayState == DayState.FreeTimeMeetup)
-            {
-                Debug.Log($"???");
-                DayController.Instance.ChangeState(DayState.GuidedTask);
-            }
-            else if (DayController.Instance._dayState == DayState.CampFire)
-            {
-                Debug.Log($"----");
-                DayController.Instance.ChangeState(DayState.Bedtime);
-            }
+            DayController.Instance.ChangeState(DayState.GuidedTask);
+        }
+        else if (DayController.Instance._dayState == DayState.CampFire)
+        {
+            DayController.Instance.ChangeState(DayState.Bedtime);
         }
     }
 }

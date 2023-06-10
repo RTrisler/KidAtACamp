@@ -6,7 +6,8 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Camper : MonoBehaviour
 {
-    private NavMeshAgent agent;
+    [HideInInspector]
+    public NavMeshAgent agent;
     private Animator animator;
     [HideInInspector]
     public int camperIndex;
@@ -75,5 +76,15 @@ public class Camper : MonoBehaviour
         {
             animator.speed = 1f;
         }
+    }
+    
+    public bool Arrived()
+    {
+        if (agent.remainingDistance <= 0.25f)
+        {
+            return true;
+        }
+
+        return false;
     }
 }

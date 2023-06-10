@@ -82,6 +82,16 @@ public class WorldNavPointController : MonoBehaviour
         campFireNodes.Shuffle(rng);
     }
 
+    public bool CampersHaveArrived()
+    {
+        foreach (var camper in campers)
+        {
+            if (!camper.Arrived()) return false;
+        }
+
+        return true;
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))

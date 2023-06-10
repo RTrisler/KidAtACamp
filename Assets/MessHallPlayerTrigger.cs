@@ -3,20 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MessHallPlayerTrigger : MonoBehaviour
+public class MessHallPlayerTrigger : PlayerGameTrigger
 {
-    public void OnTriggerEnter(Collider other)
+    protected override void FireStateEvent()
     {
-        if (other.CompareTag("Player"))
+        Debug.Log($"Firing!");
+        if (DayController.Instance._dayState == DayState.Breakfast)
         {
-            if (DayController.Instance._dayState == DayState.Breakfast)
-            {
-                DayController.Instance.ChangeState(DayState.MorningMeeting);
-            }
-            else if (DayController.Instance._dayState == DayState.Dinner)
-            {
-                DayController.Instance.ChangeState(DayState.CampFire);
-            }
+            DayController.Instance.ChangeState(DayState.MorningMeeting);
+        }
+        else if (DayController.Instance._dayState == DayState.Dinner)
+        {
+            DayController.Instance.ChangeState(DayState.CampFire);
         }
     }
 }

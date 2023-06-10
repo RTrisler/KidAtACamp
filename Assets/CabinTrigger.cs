@@ -2,16 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CabinTrigger : MonoBehaviour
+public class CabinTrigger : PlayerGameTrigger
 {
-    public void OnTriggerEnter(Collider other)
+    protected override void FireStateEvent()
     {
-        if (other.CompareTag("Player"))
+        Debug.Log($"Firing!");
+        if (DayController.Instance._dayState == DayState.Bedtime)
         {
-            if (DayController.Instance._dayState == DayState.Bedtime)
-            {
-                DayController.Instance.StartNextDay();
-            }
+            DayController.Instance.StartNextDay();
         }
     }
 }

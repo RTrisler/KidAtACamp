@@ -256,6 +256,11 @@ MonoBehaviour:
   morningMeetingNodesParent: {fileID: 943868845}
   freeRoamNodesParent: {fileID: 602986876}
   campFireNodesParent: {fileID: 82205746}
+  cabinStartNodes: []
+  messHallNodes: []
+  morningMeetingNodes: []
+  freeRoamNodes: []
+  campFireNodes: []
   camperPrefab: {fileID: 7841527941996154585, guid: e9ab4eac8e8694b4a8f9bf0d2161edc8, type: 3}
 --- !u!4 &141943229
 Transform:
@@ -482,7 +487,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 472111378}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 70.24999, y: 17, z: 25.329998}
+  m_LocalPosition: {x: 82.78, y: 17, z: 24.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1250,7 +1255,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1664284009}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 70.47, y: 17, z: 24.35}
+  m_LocalPosition: {x: 75.41, y: 17, z: 27.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
