@@ -9,6 +9,8 @@ public class MovementController : MonoBehaviour
     private Vector2 _moveDirection;
     [SerializeField]
     private float _rotationSpeed;
+    [SerializeField]
+    private float _navMeshTargetDistance;
     private void Start()
     {
         _navAgent = GetComponent<NavMeshAgent>();
@@ -27,8 +29,8 @@ public class MovementController : MonoBehaviour
     {
         if (_moveDirection == new Vector2(1, 0) || _moveDirection == new Vector2(-1, 0))
         {
-            transform.Rotate(new Vector3(0, _rotationSpeed * _moveDirection.x, 0) * Time.deltaTime);
+            transform.Rotate(new Vector3(0, _rotationSpeed * _moveDirection.x, 0) * Time.deltaTime); //rotates the player around
         }
-        _navAgent.destination = (transform.position + (transform.forward * _moveDirection.y));
+        _navAgent.destination = (transform.position + (transform.forward * _moveDirection.y * _navMeshTargetDistance)); //the position in front of the player for the navMesh to move towards
     }
 }
