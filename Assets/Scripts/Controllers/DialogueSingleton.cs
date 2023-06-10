@@ -20,8 +20,4 @@ public class DialogueSingleton : MonoBehaviour
     {
         runner.StartDialogue(nodeID);
     }
-
-    public void Update()
-    {
-    }
 }
