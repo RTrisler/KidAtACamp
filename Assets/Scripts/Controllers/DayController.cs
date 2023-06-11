@@ -55,18 +55,15 @@ public class DayController : MonoBehaviour
     public void ChangeState(DayState newState)
     {
         _dayState = newState;
+        Debug.Log(_dayState);
 
         if(newState == DayState.WakeUp)
         {
             _dayCounter++; //increases day
             Debug.Log($"Day {_dayCounter}!");
-			AudioController.StartDay();
         }
-		else if (newState == DayState.FreeTimeMeetup)
-		{
-			AudioController.SummonChildren();
-		}
 
+		AudioController.StateChangeInit(newState);
         OnStateChange?.Invoke(_dayCounter, _dayState);
     }
 
@@ -95,7 +92,7 @@ public class DayController : MonoBehaviour
         
     }
 
-    private void TrackPickUps()
+    private void TrackPickUps(GuidedTaskInteractable guideInteractable)
     {
         _pickUpCount++;
         if(_pickUpCount == 5)
