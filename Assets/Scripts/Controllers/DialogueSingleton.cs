@@ -8,7 +8,8 @@ public class DialogueSingleton : MonoBehaviour
 {
     public static DialogueSingleton Instance;
     
-    private DialogueRunner runner;
+    [HideInInspector]
+    public DialogueRunner runner;
 
     void Awake()
     {

@@ -795,6 +795,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a5d083ccec25c462b9414598b5590b42, type: 3}
   COMMOTION:
   - {fileID: 8300000, guid: 9fcc59e5bdaef4ae0900c6b5ce70a7c1, type: 3}
+  FREEROAM: []
 --- !u!82 &912098688
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1201,7 +1202,7 @@ GameObject:
   - component: {fileID: 1599335487}
   - component: {fileID: 1599335489}
   - component: {fileID: 1599335488}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PlayerReference
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1273,6 +1274,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rotationSpeed: 120
   _navMeshTargetDistance: 0.9
+  terrainMask:
+    serializedVersion: 2
+    m_Bits: 768
 --- !u!54 &1599335486
 Rigidbody:
   m_ObjectHideFlags: 0

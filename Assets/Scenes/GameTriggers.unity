@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 66239869}
   - component: {fileID: 66239868}
   - component: {fileID: 66239870}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Ceremony Triggers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 376574112}
   - component: {fileID: 376574111}
   - component: {fileID: 376574113}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cabin Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -585,7 +585,7 @@ GameObject:
   - component: {fileID: 956275934}
   - component: {fileID: 956275933}
   - component: {fileID: 956275935}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Mess Hall Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -864,7 +864,7 @@ GameObject:
   - component: {fileID: 1639870551}
   - component: {fileID: 1639870550}
   - component: {fileID: 1639870552}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Campfire Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

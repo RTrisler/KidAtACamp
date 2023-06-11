@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 246447822}
   - component: {fileID: 246447821}
   - component: {fileID: 246447820}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Crosswalk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 449567212}
   - component: {fileID: 449567211}
   - component: {fileID: 449567210}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Crosswalk (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 493168925}
   - component: {fileID: 493168924}
   - component: {fileID: 493168927}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Main1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -900,7 +900,7 @@ GameObject:
   - component: {fileID: 807906832}
   - component: {fileID: 807906831}
   - component: {fileID: 807906830}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Main2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -977,7 +977,7 @@ GameObject:
   - component: {fileID: 855673305}
   - component: {fileID: 855673304}
   - component: {fileID: 855673303}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Crosswalk (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1054,7 +1054,7 @@ GameObject:
   - component: {fileID: 895957810}
   - component: {fileID: 895957809}
   - component: {fileID: 895957808}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cabin1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1131,7 +1131,7 @@ GameObject:
   - component: {fileID: 1093088244}
   - component: {fileID: 1093088243}
   - component: {fileID: 1093088242}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Crosswalk (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1742,7 +1742,7 @@ GameObject:
   - component: {fileID: 1385727840}
   - component: {fileID: 1385727839}
   - component: {fileID: 1385727838}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cabin3 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1819,7 +1819,7 @@ GameObject:
   - component: {fileID: 1451747689}
   - component: {fileID: 1451747688}
   - component: {fileID: 1451747687}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Main1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1896,7 +1896,7 @@ GameObject:
   - component: {fileID: 1557882200}
   - component: {fileID: 1557882199}
   - component: {fileID: 1557882198}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cabin3 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2507,7 +2507,7 @@ GameObject:
   - component: {fileID: 1719837167}
   - component: {fileID: 1719837166}
   - component: {fileID: 1719837165}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cabin3 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2584,7 +2584,7 @@ GameObject:
   - component: {fileID: 1844009173}
   - component: {fileID: 1844009172}
   - component: {fileID: 1844009171}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cabin3 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3373,7 +3373,7 @@ GameObject:
   - component: {fileID: 2131347512}
   - component: {fileID: 2131347511}
   - component: {fileID: 2131347510}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cabin3 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

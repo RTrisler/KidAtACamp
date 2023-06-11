@@ -9,6 +9,8 @@ public class CameraZone : MonoBehaviour
     [SerializeField]
     private Camera _zoneCamera;
 
+    public Camera cam => _zoneCamera;
+
     private void Start()
     {
         _zoneCamera.enabled = false;
@@ -28,6 +30,7 @@ public class CameraZone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+	        Debug.Log($"Enter camzone");
             if(_currentZone != null)
             {
                 _currentZone.DisableCamera();
