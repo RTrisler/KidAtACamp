@@ -155,6 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
   camperIndex: 0
+  FollowThreshold: 25
 --- !u!1 &287547477412345155
 GameObject:
   m_ObjectHideFlags: 0

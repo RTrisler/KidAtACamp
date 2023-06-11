@@ -3787,3 +3787,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
   camperIndex: 0
+  FollowThreshold: 25
