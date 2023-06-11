@@ -94,6 +94,7 @@ public class AudioController : MonoBehaviour
 	{
 		EnvAmbienceSrc.Play();
 		EnvAmbienceSrc.volume = 0.0001f;
+		EnvAmbienceSrc.loop = true;
 
         float currentTime = 0;
         float start = EnvAmbienceSrc.volume;
