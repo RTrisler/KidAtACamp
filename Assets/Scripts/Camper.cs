@@ -34,7 +34,7 @@ public class Camper : MonoBehaviour
                 agent.SetDestination(WorldNavPointController.Instance.messHallNodes[camperIndex].position);
                 break;
             case DayState.MorningMeeting:
-                agent.SetDestination(WorldNavPointController.Instance.morningMeetingNodes[camperIndex].position);
+                agent.SetDestination(WorldNavPointController.Instance.campFireNodes[camperIndex].position);
                 break;
             case DayState.FreeRoam:
                 agent.SetDestination(WorldNavPointController.Instance.freeRoamNodes[camperIndex].position);

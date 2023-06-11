@@ -11,7 +11,6 @@ public class WorldNavPointController : MonoBehaviour
     public static WorldNavPointController Instance;
     public Transform cabinStartNodesParent;
     public Transform messHallNodesParent;
-    public Transform morningMeetingNodesParent;
     public Transform freeRoamNodesParent;
     public Transform campFireNodesParent;
 
@@ -20,8 +19,6 @@ public class WorldNavPointController : MonoBehaviour
     public List<Transform> cabinStartNodes = new();
     [HideInInspector]
     public List<Transform> messHallNodes = new();
-    [HideInInspector]
-    public List<Transform> morningMeetingNodes = new();
     [HideInInspector]
     public List<Transform> freeRoamNodes = new();
     [HideInInspector]
@@ -46,10 +43,6 @@ public class WorldNavPointController : MonoBehaviour
         {
             messHallNodes.Add(t);
         }
-        foreach (Transform t in morningMeetingNodesParent)
-        {
-            morningMeetingNodes.Add(t);
-        }
         foreach (Transform t in freeRoamNodesParent)
         {
             freeRoamNodes.Add(t);
@@ -60,11 +53,10 @@ public class WorldNavPointController : MonoBehaviour
         }
 
         if (cabinStartNodes.Count != messHallNodes.Count
-            || cabinStartNodes.Count != morningMeetingNodes.Count
             || cabinStartNodes.Count != freeRoamNodes.Count
             || cabinStartNodes.Count != campFireNodes.Count)
         {
-            Debug.LogError($"Mismatch in node counts; ({cabinStartNodes.Count}) ({messHallNodes.Count}) ({morningMeetingNodes.Count}) ({freeRoamNodes.Count}) ({campFireNodes.Count})");
+            Debug.LogError($"Mismatch in node counts; ({cabinStartNodes.Count}) ({messHallNodes.Count}) ({freeRoamNodes.Count}) ({campFireNodes.Count})");
             return;
         }
 
@@ -77,7 +69,6 @@ public class WorldNavPointController : MonoBehaviour
         }
         
         messHallNodes.Shuffle(rng);
-        morningMeetingNodes.Shuffle(rng);
         freeRoamNodes.Shuffle(rng);
         campFireNodes.Shuffle(rng);
     }

@@ -7,7 +7,11 @@ public class CampfireTrigger : PlayerGameTrigger
 {
     protected override void FireStateEvent(Transform hit)
     {
-        if (DayController.Instance._dayState == DayState.FreeTimeMeetup)
+        if (DayController.Instance._dayState == DayState.MorningMeeting)
+        {
+            PlayMorningMeetingScene();
+        }
+        else if (DayController.Instance._dayState == DayState.FreeTimeMeetup)
         {
             PlayPostFreetimeScene();
         }
@@ -17,6 +21,19 @@ public class CampfireTrigger : PlayerGameTrigger
         }
     }
     
+    public void PlayMorningMeetingScene()
+    {
+        InputController.Instance.SwitchInput(InputState.Dialogue);
+        DialogueSingleton.Instance.GetComponent<DialogueRunner>().onDialogueComplete.AddListener(OnMorningMeetingDialogueComplete);
+        DialogueSingleton.Instance.PlayNode($"MorningMeeting_{DayController.Instance._dayCounter}");
+    }
+
+    public void OnMorningMeetingDialogueComplete()
+    {
+        DialogueSingleton.Instance.GetComponent<DialogueRunner>().onDialogueComplete.RemoveListener(OnMorningMeetingDialogueComplete);
+        DayController.Instance.ChangeState(DayState.FreeRoam);
+        InputController.Instance.SwitchInput(InputState.Defualt);
+    }
     public void PlayPostFreetimeScene()
     {
         InputController.Instance.SwitchInput(InputState.Dialogue);
