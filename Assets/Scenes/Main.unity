@@ -815,7 +815,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a5d083ccec25c462b9414598b5590b42, type: 3}
   COMMOTION:
   - {fileID: 8300000, guid: 9fcc59e5bdaef4ae0900c6b5ce70a7c1, type: 3}
-  FREEROAM: []
+  FREEROAM:
+  - {fileID: 8300000, guid: 871b7c07d4dca4fb9ae019a38e2d97c3, type: 3}
 --- !u!82 &912098688
 AudioSource:
   m_ObjectHideFlags: 0

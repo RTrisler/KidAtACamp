@@ -121,9 +121,9 @@ public class AudioController : MonoBehaviour
 	// Free roam time CONSTANT 1 MINUTE
 	void StartFreeRoamMusic()
 	{
-		// StartCoroutine(SourceFadeOut(EnvAmbienceSrc1, 0.1f, 5f, false));
-		// MusicSrc.clip = ClipRefs.FREEROAM.ElementAt(0); 	
-		// StartCoroutine(SourceFadeIn(MusicSrc, 0.7f, 10f));
+		StartCoroutine(SourceFadeOut(EnvAmbienceSrc1, 5f, 0.1f, false));
+		MusicSrc.clip = ClipRefs.FREEROAM.ElementAt(0); 	
+		StartCoroutine(SourceFadeIn(MusicSrc, 15f, 0.2f));
 	}
 
 	public void StateChangeInit(DayState newState)
@@ -177,20 +177,41 @@ public class AudioController : MonoBehaviour
 	public void BeginMessHallAmbience()
 	{	
 		Debug.Log("AC: Hit BeginMessHallAmbience");
-		// false => do not disable bird sounds loop
-		StartCoroutine(SourceFadeOut(EnvAmbienceSrc1, 5f, 0.01f, false));
-		// true => loop mess hall commotion
-		EnvAmbienceSrc2.clip = ClipRefs.COMMOTION.ElementAt(0);
-		StartCoroutine(SourceFadeIn(EnvAmbienceSrc2, 5f, 0.095f, true));
+		if (DayController.Instance._dayState == DayState.Breakfast)
+		{
+			// false => do not disable bird sounds loop
+			StartCoroutine(SourceFadeOut(EnvAmbienceSrc1, 5f, 0.01f, false));
+			// true => loop mess hall commotion
+			EnvAmbienceSrc2.clip = ClipRefs.COMMOTION.ElementAt(0);
+			StartCoroutine(SourceFadeIn(EnvAmbienceSrc2, 5f, 0.095f, true));
+		}
+		else if (DayController.Instance._dayState == DayState.Dinner)
+		{
+			// Fade out cricket src at dinner
+			StartCoroutine(SourceFadeOut(EnvAmbienceSrc2, 5f, 0.01f, false));
+			// Fade in commotion src at dinner
+			EnvAmbienceSrc1.clip = ClipRefs.COMMOTION.ElementAt(0);
+			StartCoroutine(SourceFadeIn(EnvAmbienceSrc1, 5f, 0.095f, true));
+		}
 	}
 
 	public void EndMessHallAmbience()
 	{
 		Debug.Log("AC: Hit EndMessHallAmbience");
-		// Fade out mess hall commotion, disable loop
-		StartCoroutine(SourceFadeOut(EnvAmbienceSrc2, 20f, 0f, true));
-		// Fade back in bird noises, do not disable loop
-		StartCoroutine(SourceFadeIn(EnvAmbienceSrc1, 20f, 0.3f, false));
+		if (DayController.Instance._dayState == DayState.MorningMeeting)
+		{
+			// Fade out mess hall commotion, disable loop
+			StartCoroutine(SourceFadeOut(EnvAmbienceSrc2, 20f, 0f, true));
+			// Fade back in bird noises, do not disable loop
+			StartCoroutine(SourceFadeIn(EnvAmbienceSrc1, 20f, 0.3f, false));
+		}
+		else if (DayController.Instance._dayState == DayState.CampFire)
+		{
+			// Fade out mess hall commotion, disable loop
+			StartCoroutine(SourceFadeOut(EnvAmbienceSrc1, 20f, 0f, true));
+			// Fade back in cricket noises, do not disable loop
+			StartCoroutine(SourceFadeIn(EnvAmbienceSrc2, 20f, 0.3f, false));	
+		}
 	}
 
 	public void StartFireAmbience()

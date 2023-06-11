@@ -13,14 +13,14 @@ public class EnvAudioTriggers : MonoBehaviour
 			Debug.Log("From env audio trigger, current game state : " + DayController.Instance._dayState);
 		}
 		// Player enters mess for breakfast...
-		if (collider.CompareTag("Player") && DayController.Instance._dayState == DayState.Breakfast && !IsMessAmbienceInitiated)
+		if (collider.CompareTag("Player") && (DayController.Instance._dayState == DayState.Breakfast || DayController.Instance._dayState == DayState.Dinner) && !IsMessAmbienceInitiated)
 		{
 			Debug.Log("Player hit mess hall trigger, started mess breakfast ambience");
 			IsMessAmbienceInitiated = true;
 			AudioController.Instance.BeginMessHallAmbience();
 		}
 		// Player exits mess for morning meeting...
-		else if (collider.CompareTag("Player") && DayController.Instance._dayState == DayState.MorningMeeting && IsMessAmbienceInitiated)
+		else if (collider.CompareTag("Player") && (DayController.Instance._dayState == DayState.MorningMeeting || DayController.Instance._dayState == DayState.CampFire) && IsMessAmbienceInitiated)
 		{
 			Debug.Log("Player hit mess hall trigger, ending mess breakfast ambience");
 			IsMessAmbienceInitiated = false;
