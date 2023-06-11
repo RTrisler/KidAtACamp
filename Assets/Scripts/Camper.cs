@@ -12,6 +12,8 @@ public class Camper : MonoBehaviour
     [HideInInspector]
     public int camperIndex;
 
+    private Transform player;
+
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -21,8 +23,11 @@ public class Camper : MonoBehaviour
     void Start()
     {
         DayController.Instance.OnStateChange += OnDayStateChange;
+
+        player = FindObjectOfType<MovementController>().gameObject.transform;
     }
 
+    private Coroutine followCR;
     void OnDayStateChange(int day, DayState state)
     {
         switch (state)
@@ -44,8 +49,27 @@ public class Camper : MonoBehaviour
                 break;
             case DayState.GuidedTask:
                 // TODO: custom behavior per-day
+                switch (day)
+                {
+                    case 1:
+                        agent.SetDestination(WorldNavPointController.Instance.freeRoamNodes[camperIndex].position);
+                        break;
+                    // 2 they stay behind and do something secret
+                    case 3:
+                        followCR = StartCoroutine(FollowPlayer());
+                        break;
+                    case 4:
+                        agent.SetDestination(WorldNavPointController.Instance.messHallNodes[camperIndex].position);
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case DayState.Dinner:
+                if (followCR != null)
+                {
+                    StopCoroutine(followCR);
+                }
                 agent.SetDestination(WorldNavPointController.Instance.messHallNodes[camperIndex].position);
                 break;
             case DayState.CampFire:
@@ -59,6 +83,22 @@ public class Camper : MonoBehaviour
                 break;
             default:
                 break;
+        }
+    }
+
+    public float FollowThreshold = 10f;
+    IEnumerator FollowPlayer()
+    {
+        while (true)
+        {
+            if (Vector3.Magnitude(transform.position - player.position) > FollowThreshold)
+            {
+                if (!agent.SetDestination( player.position + (player.position - transform.position).normalized * (FollowThreshold / 2)))
+                {
+                    Debug.LogError($"Unable to move");
+                }
+            }
+            yield return new WaitForSeconds(Random.Range(1f, 5f));
         }
     }
     

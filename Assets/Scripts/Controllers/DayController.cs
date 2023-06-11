@@ -96,9 +96,9 @@ public class DayController : MonoBehaviour
     {
         { 1, 3 },
         { 2, 1 },
-        {3, 3},
-        {4, 3},
-        {5, 3},
+        {3, 1},
+        {4, 7},
+        {5, 1},
     };
     private void TrackPickUps(GuidedTaskInteractable guideInteractable)
     {
