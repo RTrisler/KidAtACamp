@@ -24,7 +24,6 @@ public class PlayerGameTrigger : MonoBehaviour
             && !fired)
         {
             if (requiresAllCampers && !WorldNavPointController.Instance.CampersHaveArrived()) return;
-            
             fired = true;
             FireStateEvent(other.transform);
         }

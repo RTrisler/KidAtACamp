@@ -42,7 +42,8 @@ public class MovementController : MonoBehaviour
         // need current camera
         if (CameraZone._currentZone != null 
             && Input.GetMouseButtonUp(0)
-            && !DialogueSingleton.Instance.runner.IsDialogueRunning)
+            && !DialogueSingleton.Instance.runner.IsDialogueRunning
+            && !CabinTrigger.Instance.inFade)
         {
             var cam = CameraZone._currentZone.cam;
             if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out var hit, float.MaxValue, terrainMask))

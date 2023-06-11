@@ -92,10 +92,18 @@ public class DayController : MonoBehaviour
         
     }
 
+    private Dictionary<int, int> dayGuidedPickupCount = new Dictionary<int, int>
+    {
+        { 1, 3 },
+        { 2, 1 },
+        {3, 3},
+        {4, 3},
+        {5, 3},
+    };
     private void TrackPickUps(GuidedTaskInteractable guideInteractable)
     {
         _pickUpCount++;
-        if(_pickUpCount == 5)
+        if(_pickUpCount == dayGuidedPickupCount[_dayCounter])
         {
             _pickUpCount = 0;
             ChangeState(DayState.Dinner);

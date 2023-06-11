@@ -5,12 +5,22 @@ using UnityEngine;
 public class PickUpController : MonoBehaviour
 {
     private Vector3 _positionForPickUp;
+
+    public Transform allPickupsController;
+    private Dictionary<int, List<GuidedTaskPickUp>> dayPickups = new Dictionary<int, List<GuidedTaskPickUp>>();
     private void Start()
     {
-        foreach(GuidedTaskPickUp guidePickUp in gameObject.GetComponentsInChildren<GuidedTaskPickUp>())
+        foreach (Transform child in transform)
         {
-            guidePickUp.transform.position = _positionForPickUp;
+            var idx = child.GetSiblingIndex() + 1;
+            dayPickups.Add(idx, new List<GuidedTaskPickUp>());
+            foreach(GuidedTaskPickUp guidePickUp in child.GetComponentsInChildren<GuidedTaskPickUp>())
+            {
+                dayPickups[idx].Add(guidePickUp);
+                guidePickUp.transform.position = _positionForPickUp;
+            }    
         }
+        
     }
     private void Awake()
     {
@@ -28,7 +38,7 @@ public class PickUpController : MonoBehaviour
         if (currentState == DayState.GuidedTask)
         {
             Debug.Log("set active");
-            foreach (GuidedTaskPickUp guidePickUp in gameObject.GetComponentsInChildren<GuidedTaskPickUp>())
+            foreach (GuidedTaskPickUp guidePickUp in dayPickups[DayController.Instance._dayCounter])
             {
                 guidePickUp.MoveToOriginalPosition();
             }
