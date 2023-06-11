@@ -21,6 +21,14 @@ public class InteractionController : MonoBehaviour
 
     public void SetInteractable(Interactable interactable) //will assign the interactable to this script
     {
+        if (interactable == null)
+        {
+            HUDController.Instance.HideInteractionTip();
+        }
+        else
+        {
+            HUDController.Instance.ShowInteractionTip();
+        }
         _interactable = interactable;
     }
 

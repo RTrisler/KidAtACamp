@@ -42,6 +42,25 @@ public class NPCInteractable : Interactable
 
     }
 }
+public class LoreNotes : Interactable
+{
+    [SerializeField]
+    private string _dialogueString;
+
+    public override void Interact()
+    {
+        InputController.Instance.SwitchInput(InputState.Dialogue);
+        DialogueSingleton.Instance.gameObject.GetComponent<Yarn.Unity.DialogueRunner>().onDialogueComplete.AddListener(OnDialogueCompleted);
+        DialogueSingleton.Instance.PlayNode(_dialogueString);
+    }
+
+    private void OnDialogueCompleted()
+    {
+        InputController.Instance.SwitchInput(InputState.Defualt);
+        DialogueSingleton.Instance.gameObject.GetComponent<Yarn.Unity.DialogueRunner>().onDialogueComplete.RemoveListener(OnDialogueCompleted);
+        Destroy(gameObject);
+    }
+}
 
 public class GuidedTaskInteractable : Interactable
 {
