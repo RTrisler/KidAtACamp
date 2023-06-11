@@ -185,6 +185,14 @@ public class AudioController : MonoBehaviour
 		}
 	}
 
+	public void PlayFinaleMusic()
+	{
+		StartCoroutine(SourceFadeOut(EnvAmbienceSrc1, 10f, 0f));
+		MusicSrc.clip = ClipRefs.DAYTHEMES.ElementAt(5);
+		MusicSrc.loop = true;
+		StartCoroutine(SourceFadeIn(MusicSrc, 10f, 0.25f));
+	}
+
 	void BeginDuskAmbience()
 	{	
 		Debug.Log("Beginning dusk ambience...");
@@ -239,13 +247,13 @@ public class AudioController : MonoBehaviour
 		StartCoroutine(SourceFadeOut(EnvAmbienceSrc2, 5f, 0.25f, false));
 		EnvEventSrc.loop = true;
 		EnvEventSrc.clip = ClipRefs.CAMPFIRES.ElementAt(0);
-		StartCoroutine(SourceFadeIn(EnvEventSrc, 0.5f, 0.15f));
+		StartCoroutine(SourceFadeIn(EnvEventSrc, 0.5f, 0.075f));
 	}
 
 	public void IntensifyFireAmbience()
 	{
 		Debug.Log("Intensifying fire ambience (AC)... fire should be louder");
-		StartCoroutine(SourceFadeIn(EnvEventSrc, 0.5f, 0.45f));	
+		StartCoroutine(SourceFadeIn(EnvEventSrc, 0.5f, 0.25f));	
 	}
 
 	public void LOUDER()

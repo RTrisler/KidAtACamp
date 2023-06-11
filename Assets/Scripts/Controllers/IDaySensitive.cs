@@ -14,6 +14,8 @@ public class IDaySensitive : MonoBehaviour
         DayController.Instance.OnStateChange += CheckState;
         _origianlPosition = this.transform.position;
         _outOfWorldSpace = new Vector3(0, 0, 0);
+
+        transform.position = _outOfWorldSpace;
     }
     private void OnDisable()
     {

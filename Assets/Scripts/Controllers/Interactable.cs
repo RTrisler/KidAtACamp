@@ -47,6 +47,10 @@ public class LoreNotes : Interactable
     [SerializeField]
     private string _dialogueString;
 
+    void Awake()
+    {
+        
+    }
     public override void Interact()
     {
         InputController.Instance.SwitchInput(InputState.Dialogue);

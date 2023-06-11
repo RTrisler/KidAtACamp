@@ -48,12 +48,10 @@ public class CameraZone : MonoBehaviour
 			{
 				AudioController.Instance.IntensifyFireAmbience();
 			}
-			/*
-			else if (_zoneCamera.transform.parent.name == "Crosswalk (3)" && DayController.Instance._dayState == DayState.CampFire)
+			else if (_zoneCamera.transform.parent.name == "Cabin3 (10)" && DayController.Instance._dayState == DayState.CampFire)
 			{
 				AudioController.Instance.LOUDER();
 			}
-			*/
         }
     }
 }
