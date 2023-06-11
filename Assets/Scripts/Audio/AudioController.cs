@@ -95,6 +95,36 @@ public class AudioController : MonoBehaviour
 		EnvEventSrc.volume = 0.25f;
 		EnvEventSrc.Play();
 	}
+	
+	void StartGuidedTaskMusic()
+	{
+		switch (DayController._dayCounter)
+		{
+			case 1:
+				Debug.Log("Soon to be playing guided task music for day 1...");
+				break;
+			case 2:
+				Debug.Log("Soon to be playing guided task music for day 2...");
+				break;
+			case 3:
+				Debug.Log("Soon to be playing guided task music for day 3...");
+				break;
+			case 4:
+				Debug.Log("Soon to be playing guided task music for day 4...");
+				break;
+			case 5:
+				Debug.Log("Soon to be playing guided task music for day 5...");
+				break;
+		}
+	}
+
+	// Free roam time CONSTANT 1 MINUTE
+	void StartFreeRoamMusic()
+	{
+		// StartCoroutine(SourceFadeOut(EnvAmbienceSrc1, 0.1f, 5f, false));
+		// MusicSrc.clip = ClipRefs.FREEROAM.ElementAt(0); 	
+		// StartCoroutine(SourceFadeIn(MusicSrc, 0.7f, 10f));
+	}
 
 	public void StateChangeInit(DayState newState)
 	{
@@ -109,18 +139,19 @@ public class AudioController : MonoBehaviour
 				StartDay();
 				break;
 			case DayState.Breakfast:
+				// Breakfast audio state change is taken care of in the EnvAudioTrigger for the MessHall
 				break;
 			case DayState.MorningMeeting:
-				// Breakfast dialogue just ended
-				//EndMessHallAmbience();
+				// Morning meeting audio state change is taken care of in the EnvAudioTrigger for the MessHall
 				break;
 			case DayState.FreeRoam:
+				StartFreeRoamMusic();
 				break;
 			case DayState.FreeTimeMeetup:
 				SummonChildren();
 				break;
 			case DayState.GuidedTask:
-				// Maybe handle these separately in a dif switch
+				StartGuidedTaskMusic();
 				break;
 			case DayState.Dinner:
 				BeginDuskAmbience();
@@ -159,6 +190,27 @@ public class AudioController : MonoBehaviour
 		StartCoroutine(SourceFadeIn(EnvAmbienceSrc1, 20f, 0.3f, false));
 	}
 
+	public void StartFireAmbience()
+	{
+		Debug.Log("Starting fire ambience (AC)... crickets should be quieter");
+		StartCoroutine(SourceFadeOut(EnvAmbienceSrc2, 5f, 0.1f, false));
+		EnvEventSrc.loop = true;
+		EnvEventSrc.clip = ClipRefs.CAMPFIRES.ElementAt(0);
+		StartCoroutine(SourceFadeIn(EnvEventSrc, 0.5f, 0.15f));
+	}
+
+	public void IntensifyFireAmbience()
+	{
+		Debug.Log("Intensifying fire ambience (AC)... fire should be louder");
+		StartCoroutine(SourceFadeIn(EnvEventSrc, 0.5f, 0.25f));	
+	}
+
+	public void LOUDER()
+	{
+		Debug.Log("Intensifying fire ambience (AC)... fire should be LOUDERLOUDER");
+		StartCoroutine(SourceFadeIn(EnvEventSrc, 1.5f, 0.45f));	
+	}
+
 	IEnumerator DelaySourceStart(AudioSource source, float themeLength, bool fadeIn = false)
 	{
 		Debug.Log("Waiting for theme to finish...");
@@ -177,8 +229,12 @@ public class AudioController : MonoBehaviour
 	
 	IEnumerator SourceFadeIn(AudioSource source, float duration, float targetVolume, bool changeLoop = true)
 	{
-		source.Play();
-		source.volume = 0.0001f;
+		if (!source.isPlaying)
+		{
+			source.Play();
+			source.volume = 0.0001f;
+		}
+
 		if (changeLoop && (source == EnvAmbienceSrc1 || source == EnvAmbienceSrc2))
 		{
 			source.loop = true;

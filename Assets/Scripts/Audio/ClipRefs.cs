@@ -10,16 +10,5 @@ public class ClipRefs : MonoBehaviour
 	public List<AudioClip> DAYTHEMES;
 	public List<AudioClip> EVENTS;
 	public List<AudioClip> COMMOTION;
-	
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	public List<AudioClip> FREEROAM;	
 }

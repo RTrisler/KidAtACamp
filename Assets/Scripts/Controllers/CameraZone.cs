@@ -37,6 +37,18 @@ public class CameraZone : MonoBehaviour
 
             AudioController.Instance.MoveToPosition(_currentZone._zoneCamera.transform.position);
 			AudioController.Instance.CurrentCamera = _zoneCamera;
+			if (_zoneCamera.transform.parent.name == "Crosswalk (1)" && DayController.Instance._dayState == DayState.CampFire)
+			{
+				AudioController.Instance.StartFireAmbience();
+			}
+			else if (_zoneCamera.transform.parent.name == "Crosswalk (2)" && DayController.Instance._dayState == DayState.CampFire)
+			{
+				AudioController.Instance.IntensifyFireAmbience();
+			}
+			else if (_zoneCamera.transform.parent.name == "Crosswalk (3)" && DayController.Instance._dayState == DayState.CampFire)
+			{
+				AudioController.Instance.LOUDER();
+			}
         }
     }
 }
