@@ -11,4 +11,5 @@ public class ClipRefs : MonoBehaviour
 	public List<AudioClip> EVENTS;
 	public List<AudioClip> COMMOTION;
 	public List<AudioClip> FREEROAM;	
+	public List<AudioClip> TASKTHEMES;
 }
