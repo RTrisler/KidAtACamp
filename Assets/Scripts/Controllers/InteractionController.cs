@@ -37,6 +37,7 @@ public class InteractionController : MonoBehaviour
         if(_interactable != null)
         {
             _interactable.Interact();
+            HUDController.Instance.HideInteractionTip();
         }
     }
 }
