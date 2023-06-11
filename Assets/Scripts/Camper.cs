@@ -36,7 +36,10 @@ public class Camper : MonoBehaviour
                 agent.Warp(WorldNavPointController.Instance.cabinStartNodes[camperIndex].position);
                 break;
             case DayState.Breakfast:
-                agent.SetDestination(WorldNavPointController.Instance.messHallNodes[camperIndex].position);
+                if (!agent.SetDestination(WorldNavPointController.Instance.messHallNodes[camperIndex].position))
+                {
+                    Debug.Log($"FAILED!!!!!!!!");
+                }
                 break;
             case DayState.MorningMeeting:
                 agent.SetDestination(WorldNavPointController.Instance.campFireNodes[camperIndex].position);
