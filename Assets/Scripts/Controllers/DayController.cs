@@ -8,6 +8,8 @@ public class DayController : MonoBehaviour
 {
     public static DayController Instance;
     public event Action<int, DayState> OnStateChange;
+    public event Action<int> OnPickUpTask;
+    public event Action OnAllItemsCollected;
 
     [HideInInspector]
     public int _dayCounter; //integer value representation for the day number
@@ -62,6 +64,10 @@ public class DayController : MonoBehaviour
             _dayCounter++; //increases day
             Debug.Log($"Day {_dayCounter}!");
         }
+        else if (newState == DayState.GuidedTask)
+        {
+            OnPickUpTask?.Invoke(dayGuidedPickupCount[_dayCounter]);
+        }
 
 		AudioController.StateChangeInit(newState);
         OnStateChange?.Invoke(_dayCounter, _dayState);
@@ -107,6 +113,7 @@ public class DayController : MonoBehaviour
         {
             _pickUpCount = 0;
             ChangeState(DayState.Dinner);
+            OnAllItemsCollected?.Invoke();
         }
     }
 }
