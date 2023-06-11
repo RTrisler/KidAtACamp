@@ -141,6 +141,7 @@ public class AudioController : MonoBehaviour
 	{
 		StartCoroutine(SourceFadeOut(EnvAmbienceSrc1, 5f, 0.1f, false));
 		MusicSrc.clip = ClipRefs.FREEROAM.ElementAt(0); 	
+		MusicSrc.loop = true;
 		StartCoroutine(SourceFadeIn(MusicSrc, 15f, 0.2f));
 	}
 
@@ -306,6 +307,11 @@ public class AudioController : MonoBehaviour
 
 	IEnumerator SourceFadeOut(AudioSource source, float duration, float targetVolume, bool changeLoop = true)
 	{
+		if (source == MusicSrc)
+		{
+			MusicSrc.loop = false;
+		}
+
 		if (changeLoop && (source == EnvAmbienceSrc1 || source == EnvAmbienceSrc2))
 		{
 			source.loop = false;
