@@ -111,6 +111,8 @@ public class AudioController : MonoBehaviour
 			case DayState.Breakfast:
 				break;
 			case DayState.MorningMeeting:
+				// Breakfast dialogue just ended
+				//EndMessHallAmbience();
 				break;
 			case DayState.FreeRoam:
 				break;
@@ -138,6 +140,25 @@ public class AudioController : MonoBehaviour
 		StartCoroutine(SourceFadeIn(EnvAmbienceSrc2, 10f, 0.5f));
 	}
 
+	public void BeginMessHallAmbience()
+	{	
+		Debug.Log("AC: Hit BeginMessHallAmbience");
+		// false => do not disable bird sounds loop
+		StartCoroutine(SourceFadeOut(EnvAmbienceSrc1, 5f, 0.01f, false));
+		// true => loop mess hall commotion
+		EnvAmbienceSrc2.clip = ClipRefs.COMMOTION.ElementAt(0);
+		StartCoroutine(SourceFadeIn(EnvAmbienceSrc2, 5f, 0.095f, true));
+	}
+
+	public void EndMessHallAmbience()
+	{
+		Debug.Log("AC: Hit EndMessHallAmbience");
+		// Fade out mess hall commotion, disable loop
+		StartCoroutine(SourceFadeOut(EnvAmbienceSrc2, 20f, 0f, true));
+		// Fade back in bird noises, do not disable loop
+		StartCoroutine(SourceFadeIn(EnvAmbienceSrc1, 20f, 0.3f, false));
+	}
+
 	IEnumerator DelaySourceStart(AudioSource source, float themeLength, bool fadeIn = false)
 	{
 		Debug.Log("Waiting for theme to finish...");
@@ -154,11 +175,11 @@ public class AudioController : MonoBehaviour
 		}
 	}
 	
-	IEnumerator SourceFadeIn(AudioSource source, float duration, float targetVolume)
+	IEnumerator SourceFadeIn(AudioSource source, float duration, float targetVolume, bool changeLoop = true)
 	{
 		source.Play();
 		source.volume = 0.0001f;
-		if (source == EnvAmbienceSrc1 || source == EnvAmbienceSrc2)
+		if (changeLoop && (source == EnvAmbienceSrc1 || source == EnvAmbienceSrc2))
 		{
 			source.loop = true;
 		}
@@ -169,21 +190,19 @@ public class AudioController : MonoBehaviour
         {
             currentTime += Time.deltaTime;
             source.volume = Mathf.Lerp(start, targetVolume, currentTime / duration);
-			Debug.Log("Env noise 1 volume: " + EnvAmbienceSrc1.volume);
-			Debug.Log("Env noise 2 volume: " + EnvAmbienceSrc2.volume);
+			//Debug.Log("Env noise 1 volume: " + EnvAmbienceSrc1.volume);
+			//Debug.Log("Env noise 2 volume: " + EnvAmbienceSrc2.volume);
             yield return null;
         }
         yield break;
 	}
 
-	IEnumerator SourceFadeOut(AudioSource source, float duration, float targetVolume)
+	IEnumerator SourceFadeOut(AudioSource source, float duration, float targetVolume, bool changeLoop = true)
 	{
-		Debug.Log("source = envambsrc1 : " + (source == EnvAmbienceSrc1).ToString());
-		if (source == EnvAmbienceSrc1 || source == EnvAmbienceSrc2)
+		if (changeLoop && (source == EnvAmbienceSrc1 || source == EnvAmbienceSrc2))
 		{
 			source.loop = false;
 		}
-
 
         float currentTime = 0;
         float start = source.volume;
@@ -191,8 +210,8 @@ public class AudioController : MonoBehaviour
         {
             currentTime += Time.deltaTime;
             source.volume = Mathf.Lerp(start, targetVolume, currentTime / duration);
-			Debug.Log("Env noise 1 volume: " + EnvAmbienceSrc1.volume);
-			Debug.Log("Env noise 2 volume: " + EnvAmbienceSrc2.volume);
+			//Debug.Log("Env noise 1 volume: " + EnvAmbienceSrc1.volume);
+			//Debug.Log("Env noise 2 volume: " + EnvAmbienceSrc2.volume);
             yield return null;
         }
         yield break;
