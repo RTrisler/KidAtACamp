@@ -61,13 +61,9 @@ public class DayController : MonoBehaviour
         {
             _dayCounter++; //increases day
             Debug.Log($"Day {_dayCounter}!");
-			AudioController.StartDay();
         }
-		else if (newState == DayState.FreeTimeMeetup)
-		{
-			AudioController.SummonChildren();
-		}
 
+		AudioController.StateChangeInit(newState);
         OnStateChange?.Invoke(_dayCounter, _dayState);
     }
 
