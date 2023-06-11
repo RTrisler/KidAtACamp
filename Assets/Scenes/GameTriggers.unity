@@ -167,7 +167,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &376574113
 MonoBehaviour:
@@ -181,6 +181,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 593544b8ade28324ba9fbf2ee303e99a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  requiresAllCampers: 0
+  wakeupSpawnPt: {fileID: 1902770154}
+  FadeDuration: 5
+  InterFadeStallDuration: 3
 --- !u!1 &956275932
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,7 +229,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &956275935
 MonoBehaviour:
@@ -239,6 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87f7c506e1d03674d923d95072dce5f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  requiresAllCampers: 1
 --- !u!1 &1211053120
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,7 +288,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1211053124
 MonoBehaviour:
@@ -297,6 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8f2660a2750e844980e556b561ed919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  requiresAllCampers: 1
 --- !u!1 &1639870548
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,7 +347,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1639870552
 MonoBehaviour:
@@ -355,3 +361,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 451822108f2440f4e97efade9253e086, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  requiresAllCampers: 1
+--- !u!1 &1902770153
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1902770154}
+  m_Layer: 0
+  m_Name: WakeupSpawnPt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1902770154
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902770153}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 59.63, y: 11.2, z: 109.10999}
+  m_LocalScale: {x: 1.5965, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}

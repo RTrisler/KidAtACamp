@@ -6,6 +6,7 @@ using UnityEngine;
 public class FreeTimeTimerController : MonoBehaviour
 {
     public float FreeTimeDuration = 10;
+    private bool timerRunning = false;
     void Start()
     {
         DayController.Instance.OnStateChange += OnStateChange;
@@ -13,15 +14,29 @@ public class FreeTimeTimerController : MonoBehaviour
 
     void OnStateChange(int day, DayState state)
     {
+        // interrupted, probably by debug
+        if (timerRunning)
+        {
+            EndFreeTime();
+            return;
+        }
+        
         if (state == DayState.FreeRoam)
         {
             IEnumerator DelayThenChangeState()
             {
                 yield return new WaitForSeconds(FreeTimeDuration);
-                DayController.Instance.ChangeState(DayState.FreeTimeMeetup);
+                EndFreeTime();
             }
-
+            timerRunning = true;
             StartCoroutine(DelayThenChangeState());
         }
+    }
+
+    public void EndFreeTime()
+    {
+        StopAllCoroutines();
+        timerRunning = false;
+        DayController.Instance.ChangeState(DayState.FreeTimeMeetup);
     }
 }

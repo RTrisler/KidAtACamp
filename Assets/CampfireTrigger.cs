@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class CampfireTrigger : PlayerGameTrigger
 {
-    protected override void FireStateEvent()
+    protected override void FireStateEvent(Transform hit)
     {
-        Debug.Log($"Firing!");
         if (DayController.Instance._dayState == DayState.FreeTimeMeetup)
         {
             DayController.Instance.ChangeState(DayState.GuidedTask);

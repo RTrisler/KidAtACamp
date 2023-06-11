@@ -4,12 +4,27 @@ using UnityEngine;
 
 public class CabinTrigger : PlayerGameTrigger
 {
-    protected override void FireStateEvent()
+    public Transform wakeupSpawnPt;
+    public float FadeDuration = 5f;
+    public float InterFadeStallDuration = 3f;
+    protected override void FireStateEvent(Transform hit)
     {
-        Debug.Log($"Firing!");
         if (DayController.Instance._dayState == DayState.Bedtime)
         {
-            DayController.Instance.StartNextDay();
+            StartCoroutine(PlayFadesAndStartNewDay(hit));
         }
+    }
+
+    IEnumerator PlayFadesAndStartNewDay(Transform player)
+    {
+        InputController.Instance.SwitchInput(InputState.Dialogue);
+        yield return SimpleFadeController.Instance.Fade(FadeDuration, fadeIn: true);
+        yield return new WaitForSeconds(InterFadeStallDuration);
+        DayController.Instance.StartNextDay();
+        player.transform.position = wakeupSpawnPt.position;
+        player.transform.forward = wakeupSpawnPt.forward;
+        yield return SimpleFadeController.Instance.Fade(FadeDuration, fadeIn: false);
+        DayController.Instance.ChangeState(DayState.Breakfast);
+        InputController.Instance.SwitchInput(InputState.Defualt);
     }
 }

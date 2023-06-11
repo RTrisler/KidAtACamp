@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MeetingRoomTrigger : PlayerGameTrigger
 {
-    protected override void FireStateEvent()
+    protected override void FireStateEvent(Transform hit)
     {
         Debug.Log($"Firing!");
         if (DayController.Instance._dayState == DayState.MorningMeeting)

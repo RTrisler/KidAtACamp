@@ -41,7 +41,15 @@ public class DayController : MonoBehaviour
 
     void Start()
     {
-        StartDay(0);
+        StartNextDay();
+        StartCoroutine(DelayThenStartFirstDay());
+    }
+
+    IEnumerator DelayThenStartFirstDay()
+    {
+        StartCoroutine(SimpleFadeController.Instance.Fade(5f, fadeIn: false));
+        yield return new WaitForSeconds(3f);
+        ChangeState(DayState.Breakfast);
     }
 
     public void ChangeState(DayState newState)
@@ -62,21 +70,15 @@ public class DayController : MonoBehaviour
         OnStateChange?.Invoke(_dayCounter, _dayState);
     }
 
-    void StartDay(int day)
+    public void StartNextDay()
     {
-        _dayCounter = day;
         _pickUpCount = 0;
         ChangeState(DayState.WakeUp);
     }
 
-    public void StartNextDay()
-    {
-        StartDay(_dayCounter + 1);
-    }
-
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.N))
         {
             GotoNextState();
         }
