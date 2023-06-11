@@ -44,8 +44,17 @@ public class CampfireTrigger : PlayerGameTrigger
     public void OnPostFreetimeDialogueComplete()
     {
         DialogueSingleton.Instance.GetComponent<DialogueRunner>().onDialogueComplete.RemoveListener(OnPostFreetimeDialogueComplete);
-        DayController.Instance.ChangeState(DayState.GuidedTask);
         InputController.Instance.SwitchInput(InputState.Defualt);
+
+        if (DayController.Instance._dayCounter != 5)
+        {
+            DayController.Instance.ChangeState(DayState.GuidedTask);    
+        }
+        else
+        {
+            DayController.Instance.ChangeState(DayState.FinalCeremony);
+        }
+        
     }
     
     public void PlayCampfireScene()

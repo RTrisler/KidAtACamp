@@ -13,6 +13,7 @@ public class WorldNavPointController : MonoBehaviour
     public Transform messHallNodesParent;
     public Transform freeRoamNodesParent;
     public Transform campFireNodesParent;
+    public Transform ceremonyNodesParent;
 
 
     [HideInInspector]
@@ -23,6 +24,8 @@ public class WorldNavPointController : MonoBehaviour
     public List<Transform> freeRoamNodes = new();
     [HideInInspector]
     public List<Transform> campFireNodes = new();
+    [HideInInspector]
+    public List<Transform> ceremonyNodes = new();
 
     public List<Camper> camperPrefabs;
     private List<Camper> campers = new List<Camper>();
@@ -50,6 +53,10 @@ public class WorldNavPointController : MonoBehaviour
         foreach (Transform t in campFireNodesParent)
         {
             campFireNodes.Add(t);
+        }
+        foreach (Transform t in ceremonyNodesParent)
+        {
+            ceremonyNodes.Add(t);
         }
 
         if (camperPrefabs.Count != messHallNodes.Count

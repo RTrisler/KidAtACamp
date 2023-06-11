@@ -112,5 +112,6 @@ public enum DayState
     GuidedTask,
     Dinner,
     CampFire,
-    Bedtime
+    Bedtime,
+    FinalCeremony
 }

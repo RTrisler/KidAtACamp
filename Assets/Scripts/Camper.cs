@@ -43,6 +43,7 @@ public class Camper : MonoBehaviour
                 agent.SetDestination(WorldNavPointController.Instance.campFireNodes[camperIndex].position);
                 break;
             case DayState.GuidedTask:
+                // TODO: custom behavior per-day
                 break;
             case DayState.Dinner:
                 agent.SetDestination(WorldNavPointController.Instance.messHallNodes[camperIndex].position);
@@ -52,6 +53,9 @@ public class Camper : MonoBehaviour
                 break;
             case DayState.Bedtime:
                 agent.SetDestination(WorldNavPointController.Instance.cabinStartNodes[camperIndex].position);
+                break;
+            case DayState.FinalCeremony:
+                agent.SetDestination(WorldNavPointController.Instance.ceremonyNodes[camperIndex].position);
                 break;
             default:
                 break;
