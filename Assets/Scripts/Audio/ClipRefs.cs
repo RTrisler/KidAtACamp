@@ -8,6 +8,7 @@ public class ClipRefs : MonoBehaviour
 	public List<AudioClip> PMCRICKETS;
 	public List<AudioClip> CAMPFIRES;
 	public List<AudioClip> DAYTHEMES;
+	public List<AudioClip> EVENTS;
 	
     // Start is called before the first frame update
     void Start()

@@ -74,6 +74,12 @@ public class AudioController : MonoBehaviour
 		}
 	}
 
+	public void SummonChildren()
+	{
+		EnvEventSrc.clip = ClipRefs.EVENTS.ElementAt(0);
+		EnvEventSrc.Play();
+	}
+
 	IEnumerator DelayEnvAmbience(float themeLength, bool fadeIn = false)
 	{
 		Debug.Log("Waiting for theme to finish...");
