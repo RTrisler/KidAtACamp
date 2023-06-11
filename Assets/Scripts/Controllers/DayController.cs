@@ -55,6 +55,7 @@ public class DayController : MonoBehaviour
     public void ChangeState(DayState newState)
     {
         _dayState = newState;
+        Debug.Log(_dayState);
 
         if(newState == DayState.WakeUp)
         {
@@ -95,7 +96,7 @@ public class DayController : MonoBehaviour
         
     }
 
-    private void TrackPickUps()
+    private void TrackPickUps(GuidedTaskInteractable guideInteractable)
     {
         _pickUpCount++;
         if(_pickUpCount == 5)

@@ -45,31 +45,19 @@ public class NPCInteractable : Interactable
 
 public class GuidedTaskInteractable : Interactable
 {
-    public static event Action OnGuidedTaskPickUp;
-
-    private void Start()
+    public static event Action<GuidedTaskInteractable> OnGuidedTaskPickUp;
+    private Vector3 _originalPosition;
+    private void Awake()
     {
-        this.gameObject.SetActive(false);
+        _originalPosition = this.transform.position;
     }
 
-    private void OnEnable()
-    {
-        DayController.Instance.OnStateChange += CheckState;
-    }
-    private void OnDisable()
-    {
-        DayController.Instance.OnStateChange -= CheckState;
-    }
-    private void CheckState(int dayCount, DayState currentState)
-    {
-        if(currentState == DayState.GuidedTask)
-        {
-            this.gameObject.SetActive(true);
-        }
-    }
     public override void Interact()
     {
-        this.gameObject.SetActive(false);
-        OnGuidedTaskPickUp?.Invoke();
+        OnGuidedTaskPickUp?.Invoke(this);
+    }
+    public void MoveToOriginalPosition()
+    {
+        this.gameObject.transform.position = _originalPosition;
     }
 }
