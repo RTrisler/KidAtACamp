@@ -18,6 +18,7 @@ public class FinalCeremonyTrigger : PlayerGameTrigger
         InputController.Instance.SwitchInput(InputState.Dialogue);
         DialogueSingleton.Instance.GetComponent<DialogueRunner>().onDialogueComplete.AddListener(OnStartFinalCeremonyComplete);
         DialogueSingleton.Instance.PlayNode($"FinalCeremony");
+		AudioController.Instance.PlayFinaleMusic();
     }
     
     public void OnStartFinalCeremonyComplete()

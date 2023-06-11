@@ -185,6 +185,14 @@ public class AudioController : MonoBehaviour
 		}
 	}
 
+	public void PlayFinaleMusic()
+	{
+		StartCoroutine(SourceFadeOut(EnvAmbienceSrc1, 10f, 0f));
+		MusicSrc.clip = ClipRefs.DAYTHEMES.ElementAt(5);
+		MusicSrc.loop = true;
+		StartCoroutine(SourceFadeIn(MusicSrc, 10f, 0.25f));
+	}
+
 	void BeginDuskAmbience()
 	{	
 		Debug.Log("Beginning dusk ambience...");
