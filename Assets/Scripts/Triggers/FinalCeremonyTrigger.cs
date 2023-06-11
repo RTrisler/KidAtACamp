@@ -17,11 +17,21 @@ public class FinalCeremonyTrigger : PlayerGameTrigger
     {
         InputController.Instance.SwitchInput(InputState.Dialogue);
         DialogueSingleton.Instance.GetComponent<DialogueRunner>().onDialogueComplete.AddListener(OnStartFinalCeremonyComplete);
-        DialogueSingleton.Instance.PlayNode($"FinalCeremonyStart");
+        DialogueSingleton.Instance.PlayNode($"FinalCeremony");
     }
     
     public void OnStartFinalCeremonyComplete()
     {
         DialogueSingleton.Instance.GetComponent<DialogueRunner>().onDialogueComplete.RemoveListener(OnStartFinalCeremonyComplete);
+
+        IEnumerator FinalCutscene()
+        {
+            yield return SimpleFadeController.Instance.Fade(10f, fadeIn: true);
+            Application.Quit();
+            Debug.Log($"You win");
+        }
+
+        StartCoroutine(FinalCutscene());
+
     }
 }
