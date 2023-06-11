@@ -57,6 +57,7 @@ public class AudioController : MonoBehaviour
 	{
 		// Daycontroller singleton to differentiate (day counter)
 		Debug.Log("AUDIOCONTROLLER/STARTDAY: CURRENT DAY: " + DayController.Instance._dayCounter);
+		MusicSrc.loop = false;
 		switch (DayController.Instance._dayCounter)
 		{
 			case 1:
@@ -67,24 +68,28 @@ public class AudioController : MonoBehaviour
 				break;
 			case 2:
 				MusicSrc.clip = ClipRefs.DAYTHEMES.ElementAt(1);				
-				MusicSrc.Play();
+				StartCoroutine(SourceFadeIn(MusicSrc, 2.5f, 0.3f));
 				EnvAmbienceSrc1.clip = ClipRefs.AMBIRDS.ElementAt(0);
 				StartCoroutine(DelaySourceStart(EnvAmbienceSrc1, MusicSrc.clip.length - 2.5f, true));
 				break;
 			case 3:
 				MusicSrc.clip = ClipRefs.DAYTHEMES.ElementAt(2);				
-				MusicSrc.Play();
+				StartCoroutine(SourceFadeIn(MusicSrc, 2.5f, 0.3f));
 				EnvAmbienceSrc1.clip = ClipRefs.AMBIRDS.ElementAt(0);
 				StartCoroutine(DelaySourceStart(EnvAmbienceSrc1, MusicSrc.clip.length - 2.5f, true));
 				break;
 			case 4:
 				MusicSrc.clip = ClipRefs.DAYTHEMES.ElementAt(3);
-				MusicSrc.Play();
+				StartCoroutine(SourceFadeIn(MusicSrc, 2.5f, 0.3f));
 				EnvAmbienceSrc1.clip = ClipRefs.AMBIRDS.ElementAt(0);
 				StartCoroutine(DelaySourceStart(EnvAmbienceSrc1, MusicSrc.clip.length - 2.5f, true));
 				break;
 			case 5:
 				Debug.Log("day5 from audio controller");
+				MusicSrc.clip = ClipRefs.DAYTHEMES.ElementAt(4);
+				StartCoroutine(SourceFadeIn(MusicSrc, 2.5f, 0.3f));
+				EnvAmbienceSrc1.clip = ClipRefs.AMBIRDS.ElementAt(0);
+				StartCoroutine(DelaySourceStart(EnvAmbienceSrc1, MusicSrc.clip.length - 2.5f, true));
 				break;
 		}
 	}
@@ -98,24 +103,37 @@ public class AudioController : MonoBehaviour
 	
 	void StartGuidedTaskMusic()
 	{
+		StartCoroutine(SourceFadeOut(EnvAmbienceSrc1, 5f, 0.1f, false));
 		switch (DayController._dayCounter)
 		{
 			case 1:
 				Debug.Log("Soon to be playing guided task music for day 1...");
+				MusicSrc.clip = ClipRefs.TASKTHEMES.ElementAt(0);
 				break;
 			case 2:
 				Debug.Log("Soon to be playing guided task music for day 2...");
+				MusicSrc.clip = ClipRefs.TASKTHEMES.ElementAt(1);
 				break;
 			case 3:
 				Debug.Log("Soon to be playing guided task music for day 3...");
+				MusicSrc.clip = ClipRefs.TASKTHEMES.ElementAt(2);
 				break;
 			case 4:
 				Debug.Log("Soon to be playing guided task music for day 4...");
+				MusicSrc.clip = ClipRefs.TASKTHEMES.ElementAt(3);
 				break;
 			case 5:
 				Debug.Log("Soon to be playing guided task music for day 5...");
 				break;
 		}
+		MusicSrc.loop = true;
+		StartCoroutine(SourceFadeIn(MusicSrc, 15f, 0.3f));
+	}
+
+	void EndGuidedTaskMusic()
+	{
+		MusicSrc.loop = false;
+		StartCoroutine(SourceFadeOut(MusicSrc, 5f, 0f));
 	}
 
 	// Free roam time CONSTANT 1 MINUTE
@@ -154,6 +172,7 @@ public class AudioController : MonoBehaviour
 				StartGuidedTaskMusic();
 				break;
 			case DayState.Dinner:
+				EndGuidedTaskMusic();
 				BeginDuskAmbience();
 				break;
 			case DayState.CampFire:
@@ -217,7 +236,7 @@ public class AudioController : MonoBehaviour
 	public void StartFireAmbience()
 	{
 		Debug.Log("Starting fire ambience (AC)... crickets should be quieter");
-		StartCoroutine(SourceFadeOut(EnvAmbienceSrc2, 5f, 0.1f, false));
+		StartCoroutine(SourceFadeOut(EnvAmbienceSrc2, 5f, 0.25f, false));
 		EnvEventSrc.loop = true;
 		EnvEventSrc.clip = ClipRefs.CAMPFIRES.ElementAt(0);
 		StartCoroutine(SourceFadeIn(EnvEventSrc, 0.5f, 0.15f));
@@ -226,7 +245,7 @@ public class AudioController : MonoBehaviour
 	public void IntensifyFireAmbience()
 	{
 		Debug.Log("Intensifying fire ambience (AC)... fire should be louder");
-		StartCoroutine(SourceFadeIn(EnvEventSrc, 0.5f, 0.25f));	
+		StartCoroutine(SourceFadeIn(EnvEventSrc, 0.5f, 0.45f));	
 	}
 
 	public void LOUDER()

@@ -811,12 +811,18 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1a307f0f2c0524b69aeb315c0d9e1518, type: 3}
   - {fileID: 8300000, guid: 9967cdd1d5af44896b4ee3b01659d1db, type: 3}
   - {fileID: 8300000, guid: 2c800bfd5d3f545e59e080c150bc6731, type: 3}
+  - {fileID: 8300000, guid: 10f1ec722ec304b73bf568d0bf7db603, type: 3}
   EVENTS:
   - {fileID: 8300000, guid: a5d083ccec25c462b9414598b5590b42, type: 3}
   COMMOTION:
   - {fileID: 8300000, guid: 9fcc59e5bdaef4ae0900c6b5ce70a7c1, type: 3}
   FREEROAM:
   - {fileID: 8300000, guid: 871b7c07d4dca4fb9ae019a38e2d97c3, type: 3}
+  TASKTHEMES:
+  - {fileID: 8300000, guid: 14a002e3b561040d3b27bf5e7790dc89, type: 3}
+  - {fileID: 8300000, guid: b11bb63e1e1b44420b5e8507c6b2d5b5, type: 3}
+  - {fileID: 8300000, guid: 3273b27ce06a14a62aac3ec0d725ae90, type: 3}
+  - {fileID: 8300000, guid: 783f541265cb9461284e2e0fa887b820, type: 3}
 --- !u!82 &912098688
 AudioSource:
   m_ObjectHideFlags: 0
