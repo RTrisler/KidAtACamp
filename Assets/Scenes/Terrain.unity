@@ -2879,7 +2879,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65d05e5fe64895458ebcd98ad9e8fab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeEffect: {fileID: 1759390774}
 --- !u!4 &1484467820
 Transform:
   m_ObjectHideFlags: 0
@@ -3471,11 +3470,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 86b6f206e09dae647a8c28fccb4ecd37, type: 3}
   m_PrefabInstance: {fileID: 1756356481}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1759390774 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4741448046091694155, guid: aa88abefdc9a6d741a7ff0702dcbd4cd, type: 3}
-  m_PrefabInstance: {fileID: 9075228729134813357}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1773613067
 PrefabInstance:
