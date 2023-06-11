@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class HUDController : MonoBehaviour
 {
@@ -10,8 +11,8 @@ public class HUDController : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        
-        HideInteractionTip();
+
+        ChangeInteractText("Click to move...");
     }
 
     public void ShowInteractionTip()
@@ -22,5 +23,10 @@ public class HUDController : MonoBehaviour
     public void HideInteractionTip()
     {
         interactionPrompt.SetActive(false);
+    }
+
+    public void ChangeInteractText(string newText)
+    {
+        interactionPrompt.GetComponent<TextMeshProUGUI>().text = newText;
     }
 }

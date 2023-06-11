@@ -13,6 +13,7 @@ public class MovementController : MonoBehaviour
     private float _navMeshTargetDistance;
 
     private Animator animator;
+    private bool _firstInteraction = true;
     
     private void Start()
     {
@@ -48,6 +49,12 @@ public class MovementController : MonoBehaviour
             {
                 if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Terrain"))
                 {
+                    if (_firstInteraction)
+                    {
+                        _firstInteraction = false;
+                        HUDController.Instance.ChangeInteractText("Press F to interact");
+                        HUDController.Instance.HideInteractionTip();
+                    }
                     if (!_navAgent.SetDestination(hit.point))
                     {
                         Debug.LogError($"Attempting to navigate off-mesh");
