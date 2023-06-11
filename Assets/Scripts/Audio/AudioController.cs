@@ -159,6 +159,9 @@ public class AudioController : MonoBehaviour
 			case DayState.CampFire:
 				break;
 			case DayState.Bedtime:
+				Debug.Log("(AC) Bedtime! Campfire sound dies in 10 seconds");
+				EnvEventSrc.loop = false;
+				StartCoroutine(SourceFadeOut(EnvEventSrc, 10f, 0f));
 				break;
 		}
 	}
