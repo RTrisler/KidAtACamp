@@ -11,10 +11,13 @@ public class MovementController : MonoBehaviour
     private float _rotationSpeed;
     [SerializeField]
     private float _navMeshTargetDistance;
+
+    private Animator animator;
     
     private void Start()
     {
         _navAgent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
         // InputController.Instance.OnMovementInput += MovePlayer;
     }
     private void OnDisable()
@@ -51,6 +54,18 @@ public class MovementController : MonoBehaviour
                     }                    
                 }
             }
+        }
+        
+        // this is fucking horrible and stolen from Camper.cs
+        bool isMoving = _navAgent.velocity.magnitude > 0.25f;
+        animator.SetBool("WalkingFwd", isMoving);
+        if (isMoving)
+        {
+            animator.speed = _navAgent.velocity.magnitude / _navAgent.speed;
+        }
+        else
+        {
+            animator.speed = 1f;
         }
     }
 }
